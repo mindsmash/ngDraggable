@@ -445,6 +445,9 @@ angular.module("ngDraggable", [])
                         });
                         element.css('width', obj.element[0].offsetWidth);
                         element.css('height', obj.element[0].offsetHeight);
+                        var cloneBound = element[0].getBoundingClientRect();
+                        element.css('left', -cloneBound.left);
+                        element.css('top', -cloneBound.top);
 
                         moveElement(obj.tx, obj.ty);
                     }
