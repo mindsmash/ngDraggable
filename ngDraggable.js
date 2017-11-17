@@ -1,5 +1,7 @@
 /*
+ * https://github.com/mindsmash/ngDraggable
  *
+ * forked from:
  * https://github.com/fatlinesofcode/ngDraggable
  */
 angular.module("ngDraggable", [])

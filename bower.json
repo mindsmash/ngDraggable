@@ -2,7 +2,7 @@
   "name": "ngDraggable",
   "main": "ngDraggable.js",
   "version": "0.1.10",
-  "homepage": "https://github.com/fatlinesofcode/ngDraggable",
+  "homepage": "https://github.com/mindsmash/ngDraggable",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -11,6 +11,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "latest"
+    "angular": "1.6.5"
   }
 }
