@@ -1,7 +1,7 @@
 {
-  "name": "ngDraggable",
+  "name": "ngDraggable-coyo",
   "main": "ngDraggable.js",
-  "version": "0.1.10",
+  "version": "0.1.12",
   "homepage": "https://github.com/mindsmash/ngDraggable",
   "ignore": [
     "**/.*",
