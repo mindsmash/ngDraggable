@@ -20,7 +20,7 @@ angular.module("ngDraggable", [])
             return event;
         };
 
-        scope.touchTimeout = 100;
+        scope.touchTimeout = 300;
 
     }])
     .directive('ngDrag', ['$rootScope', '$parse', '$document', '$window', 'ngDraggable', function ($rootScope, $parse, $document, $window, ngDraggable) {
