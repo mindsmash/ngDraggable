@@ -233,6 +233,7 @@ angular.module("ngDraggable", [])
                     if (onDragStopCallback ){
                         scope.$apply(function () {
                             onDragStopCallback(scope, {$data: _data, $event: evt});
+                            $rootScope.$broadcast('removePlaceholder');
                         });
                     }
 
@@ -246,6 +247,7 @@ angular.module("ngDraggable", [])
 
                     scope.$apply(function () {
                         onDragSuccessCallback(scope, {$data: _data, $event: evt});
+                        $rootScope.$broadcast('removePlaceholder');
                     });
                 };
 
@@ -400,6 +402,38 @@ angular.module("ngDraggable", [])
             }
         };
     }])
+
+    .directive('ngPlaceholder', ['$document', function ($document) {
+      return {
+        restrict: 'A',
+        link: function (scope, element) {
+          var initialize = function () {
+            toggleListeners(true);
+          };
+
+          var toggleListeners = function (enable) {
+
+            if (!enable)return;
+            scope.$on('draggable:start', onDragStart);
+            scope.$on('removePlaceholder', removePlaceholder);
+          };
+
+          var onDragStart = function (obj) {
+            if(obj.element === element) {
+              var placeholder = angular.element('<div class="ng-placeholder"></div>');
+              placeholder.insertAfter(obj.element);
+            }
+          };
+
+          var removePlaceholder = function () {
+              $document.find('.ng-placeholder').remove();
+          };
+
+          initialize();
+        }
+      }
+    }])
+
     .directive('ngDragClone', ['$parse', '$timeout', 'ngDraggable', function ($parse, $timeout, ngDraggable) {
         return {
             restrict: 'A',
