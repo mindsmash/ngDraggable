@@ -418,7 +418,7 @@ angular.module("ngDraggable", [])
             scope.$on('removePlaceholder', removePlaceholder);
           };
 
-          var onDragStart = function (obj) {
+          var onDragStart = function (evt, obj) {
             if(obj.element === element) {
               var placeholder = angular.element('<div class="ng-placeholder"></div>');
               placeholder.insertAfter(obj.element);
