@@ -440,6 +440,8 @@ angular.module("ngDraggable", [])
             link: function (scope, element, attrs) {
                 var img, _allowClone=true;
                 var _dragOffset = null;
+                var cursorX = null;
+                var cursorY = null;
                 scope.clonedData = {};
                 var initialize = function () {
 
@@ -459,6 +461,7 @@ angular.module("ngDraggable", [])
                     scope.$on('draggable:start', onDragStart);
                     scope.$on('draggable:move', onDragMove);
                     scope.$on('draggable:end', onDragEnd);
+                    scope.$on('mousemove', onMouseMove);
                     preventContextMenu();
 
                 };
@@ -468,6 +471,14 @@ angular.module("ngDraggable", [])
                     //  element.on('mousedown touchstart touchmove touchend touchcancel', absorbEvent_);
                     img.on('mousedown touchstart touchmove touchend touchcancel', absorbEvent_);
                 };
+
+                var onMouseMove = function () {
+                    window.document.onmousemove = function (ev) {
+                        cursorX = ev.pageX;
+                        cursorY = ev.pageY;
+                    }
+                };
+
                 var onDragStart = function(evt, obj, elm) {
                     _allowClone=true;
                     if(angular.isDefined(obj.data.allowClone)){
@@ -479,9 +490,8 @@ angular.module("ngDraggable", [])
                         });
                         element.css('width', obj.element[0].offsetWidth);
                         element.css('height', obj.element[0].offsetHeight);
-                        var cloneBound = element[0].getBoundingClientRect();
-                        element.css('left', -cloneBound.left);
-                        element.css('top', -cloneBound.top);
+                        element.css('left', cursorX);
+                        element.css('top', cursorY);
 
                         moveElement(obj.tx, obj.ty);
                     }
